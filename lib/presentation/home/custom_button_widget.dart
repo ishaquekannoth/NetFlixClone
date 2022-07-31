@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:netflixproject/core/colors/colors.dart';
 
 class CustomButtonWidget extends StatelessWidget {
-  const CustomButtonWidget({
-    Key? key,required this.icon,required this.title
-  }) : super(key: key);
+  const CustomButtonWidget({Key? key, required this.icon, required this.title,this.iconSize=30,this.textSize=18})
+      : super(key: key);
   final IconData icon;
   final String title;
+  final double iconSize;
+  final double textSize;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,11 +15,11 @@ class CustomButtonWidget extends StatelessWidget {
         Icon(
           icon,
           color: kWhiteColor,
-          size: 25,
+          size: iconSize,
         ),
         Text(
           title,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style:  TextStyle(fontSize: textSize, fontWeight: FontWeight.bold),
         )
       ],
     );

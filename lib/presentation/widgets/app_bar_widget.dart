@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflixproject/core/constants.dart';
 
 class AppBarWidgets extends StatelessWidget {
   const AppBarWidgets({Key? key,required this.title}) : super(key: key);
@@ -9,6 +10,7 @@ class AppBarWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        kwidth,
         Text(
             title,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),

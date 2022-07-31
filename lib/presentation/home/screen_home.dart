@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:netflixproject/core/constants.dart';
@@ -48,7 +47,7 @@ class ScreenHome extends StatelessWidget {
               ),
               scrollNotifier.value == true
                   ?AnimatedContainer(
-                    duration: Duration(milliseconds: 1000),
+                    duration: const Duration(milliseconds: 1000),
                       width: double.infinity,
                       height: 80,
                       color: Colors.black.withOpacity(0.3),
