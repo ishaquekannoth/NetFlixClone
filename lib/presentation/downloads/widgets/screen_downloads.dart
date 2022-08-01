@@ -1,15 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflixproject/application/downloads/downloads_bloc.dart';
 import 'package:netflixproject/core/colors/colors.dart';
 import 'package:netflixproject/core/constants.dart';
 import 'package:netflixproject/presentation/widgets/app_bar_widget.dart';
 
 class ScreenDownloads extends StatelessWidget {
   ScreenDownloads({Key? key}) : super(key: key);
-  final _widgetList = [
-    const _SmartDownloads(), Section2(), const Section3()
-  ];
+  final _widgetList = [const _SmartDownloads(), Section2(), const Section3()];
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +21,11 @@ class ScreenDownloads extends StatelessWidget {
           )),
       body: ListView.separated(
         padding: const EdgeInsets.all(10),
-       itemCount: _widgetList.length,
-       itemBuilder: ((context, index) => _widgetList[index]),
-       separatorBuilder: (context, index) =>const SizedBox(height: 25,),
+        itemCount: _widgetList.length,
+        itemBuilder: ((context, index) => _widgetList[index]),
+        separatorBuilder: (context, index) => const SizedBox(
+          height: 25,
+        ),
       ),
     ));
   }
@@ -31,15 +33,20 @@ class ScreenDownloads extends StatelessWidget {
 
 class Section2 extends StatelessWidget {
   Section2({Key? key}) : super(key: key);
-  final List imageList = [
-    "https://www.themoviedb.org/t/p/w220_and_h330_face/8cXbitsS6dWQ5gfMTZdorpAAzEH.jpg",
-    "https://www.themoviedb.org/t/p/w220_and_h330_face/x1q3FkqFHBkMeKnHiS6GYgdLvUs.jpg",
-    "https://www.themoviedb.org/t/p/w220_and_h330_face/2ahZgaFAbWoKMfJHhmhZDrdStgD.jpg"
-  ];
+  // final List imageList = [
+  //   "https://www.themoviedb.org/t/p/w220_and_h330_face/8cXbitsS6dWQ5gfMTZdorpAAzEH.jpg",
+  //   "https://www.themoviedb.org/t/p/w220_and_h330_face/x1q3FkqFHBkMeKnHiS6GYgdLvUs.jpg",
+  //   "https://www.themoviedb.org/t/p/w220_and_h330_face/2ahZgaFAbWoKMfJHhmhZDrdStgD.jpg"
+  // ];
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      BlocProvider.of<DownloadsBloc>(context)
+          .add(const DownloadsEvent.getDownloadsImage());
+    });
     final Size size = MediaQuery.of(context).size;
+
     return (Column(
       children: [
         const Text(
@@ -54,34 +61,45 @@ class Section2 extends StatelessWidget {
           style: TextStyle(color: Colors.grey),
           textAlign: TextAlign.center,
         ),
-        SizedBox(
-          height: size.width,
-          width: size.width,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              CircleAvatar(
-                  radius: size.width * .36,
-                  backgroundColor: Colors.grey.withOpacity(0.4)),
-              DownloadsImageWidget(
-                image: imageList[1],
-                margin: const EdgeInsets.only(right: 130, bottom: 40,top: 50),
-                size: Size(size.width * 0.4, size.height * 0.4),
-                angle: -20,
-              ),
-              DownloadsImageWidget(
-                image: imageList[0],
-                margin: const EdgeInsets.only(left: 130, bottom: 40,top: 50),
-                size: Size(size.width * 0.4, size.height * 0.4),
-                angle: 20,
-              ),
-              DownloadsImageWidget(
-                image: imageList[2],
-                margin: const EdgeInsets.only(bottom: 20,top: 50),
-                size: Size(size.width * 0.4, size.height * 0.4),
-              )
-            ],
-          ),
+        BlocBuilder<DownloadsBloc, DownloadsState>(
+          builder: (context, state) {
+            return SizedBox(
+              height: size.width,
+              width: size.width,
+              child: state.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        CircleAvatar(
+                            radius: size.width * .36,
+                            backgroundColor: Colors.grey.withOpacity(0.4)),
+                        DownloadsImageWidget(
+                          image:
+                              '$imageAppendUrl${state.downloads?[0].posterPath}',
+                          margin: const EdgeInsets.only(
+                              right: 130, bottom: 40, top: 50),
+                          size: Size(size.width * 0.4, size.height * 0.4),
+                          angle: -20,
+                        ),
+                        DownloadsImageWidget(
+                          image:
+                              '$imageAppendUrl${state.downloads?[1].posterPath}',
+                          margin: const EdgeInsets.only(
+                              left: 130, bottom: 40, top: 50),
+                          size: Size(size.width * 0.4, size.height * 0.4),
+                          angle: 20,
+                        ),
+                        DownloadsImageWidget(
+                          image:
+                              '$imageAppendUrl${state.downloads?[2].posterPath}',
+                          margin: const EdgeInsets.only(bottom: 20, top: 50),
+                          size: Size(size.width * 0.4, size.height * 0.4),
+                        )
+                      ],
+                    ),
+            );
+          },
         ),
       ],
     ));
@@ -186,8 +204,8 @@ class DownloadsImageWidget extends StatelessWidget {
             height: size.height,
             width: size.width,
             decoration: BoxDecoration(
-              image:
-                  DecorationImage(image: NetworkImage(image), fit: BoxFit.cover),
+              image: DecorationImage(
+                  image: NetworkImage(image), fit: BoxFit.cover),
               borderRadius: BorderRadius.circular(borderRadius),
             ),
           ),
