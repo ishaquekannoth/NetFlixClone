@@ -8,36 +8,36 @@ class BackgroundCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return(
-      Stack(
-            children: [
-              Container(
-                width: double.infinity,
-                height: 600,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(kMainImage))),
-              ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                left: 0,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom:10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [const CustomButtonWidget(title: 'My List',icon: Icons.add,), _playButton(),
-                    const CustomButtonWidget(icon: Icons.info, title: 'Info')
-                    ],
-                  ),
+    return (Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          height: 600,
+          decoration: const BoxDecoration(
+              image: DecorationImage(image: NetworkImage(kMainImage))),
+        ),
+        Positioned(
+          bottom: 0,
+          right: 0,
+          left: 0,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const CustomButtonWidget(
+                  title: 'My List',
+                  icon: Icons.add,
                 ),
-              )
-            ],
-          )
-    );
-    
+                _playButton(),
+                const CustomButtonWidget(icon: Icons.info, title: 'Info')
+              ],
+            ),
+          ),
+        )
+      ],
+    ));
   }
-
 
   TextButton _playButton() {
     return TextButton.icon(

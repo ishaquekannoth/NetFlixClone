@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:netflixproject/core/colors/colors.dart';
 
 class CustomButtonWidget extends StatelessWidget {
-  const CustomButtonWidget({Key? key, required this.icon, required this.title,this.iconSize=30,this.textSize=18})
+  const CustomButtonWidget(
+      {Key? key,
+      required this.icon,
+      required this.title,
+      this.iconSize = 30,
+      this.textSize = 18})
       : super(key: key);
   final IconData icon;
   final String title;
@@ -19,7 +24,7 @@ class CustomButtonWidget extends StatelessWidget {
         ),
         Text(
           title,
-          style:  TextStyle(fontSize: textSize, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: textSize, fontWeight: FontWeight.bold),
         )
       ],
     );

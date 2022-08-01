@@ -23,7 +23,7 @@ class NumberCard extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: kRadius10,
                   image: const DecorationImage(
-                    fit: BoxFit.cover,
+                      fit: BoxFit.cover,
                       image: NetworkImage(
                           "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/uSMJbYhaEpQtF9vkMhpgljc0CA4.jpg"))),
             ),
@@ -36,9 +36,9 @@ class NumberCard extends StatelessWidget {
             strokeColor: kWhiteColor,
             strokeWidth: 4.0,
             child: Text(
-              '${index+1}',
+              '${index + 1}',
               style: const TextStyle(
-                color: kBlackcolor,
+                  color: kBlackcolor,
                   fontSize: 130,
                   fontWeight: FontWeight.bold,
                   decoration: TextDecoration.none,
