@@ -1,11 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:netflixproject/core/colors/colors.dart';
+import 'package:netflixproject/core/constants.dart';
+import 'package:netflixproject/domain/downloads/models/downloads.dart';
+
+class VideoListItemInheritedWidget extends InheritedWidget {
+  final Widget widget;
+  final Downloads movieData;
+
+  VideoListItemInheritedWidget(
+      {Key? key, required this.widget, required this.movieData})
+      : super(child: widget);
+  @override
+  bool updateShouldNotify(covariant VideoListItemInheritedWidget oldWidget) {
+    return oldWidget.movieData != movieData;
+  }
+
+  static VideoListItemInheritedWidget? of(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<VideoListItemInheritedWidget>();
+  }
+}
 
 class VideoListItem extends StatelessWidget {
   const VideoListItem({Key? key, required this.index}) : super(key: key);
   final int index;
   @override
   Widget build(BuildContext context) {
+    final posterPath =
+        VideoListItemInheritedWidget.of(context)?.movieData.posterPath;
     return Stack(
       children: [
         (Container(
@@ -30,13 +52,14 @@ class VideoListItem extends StatelessWidget {
                         ))),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
+                  children: [
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 10),
                       child: CircleAvatar(
                         radius: 30,
-                        backgroundImage: NetworkImage(
-                            "https://www.themoviedb.org/t/p/w220_and_h330_face/2ahZgaFAbWoKMfJHhmhZDrdStgD.jpg"),
+                        backgroundImage: posterPath == null
+                            ? null
+                            : NetworkImage('$imageAppendUrl$posterPath'),
                       ),
                     ),
                     VideoActionWidget(
