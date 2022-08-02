@@ -21,7 +21,7 @@ class SearchIdleWidget extends StatelessWidget {
             if (state.isLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state.isError) {
-              return const Center(child: Text('Err Fetching data'));
+              return const Center(child: Text('Err fetching Data'));
             } else if (state.idleList.isEmpty) {
               return const Center(child: Text('List is Empty'));
             }

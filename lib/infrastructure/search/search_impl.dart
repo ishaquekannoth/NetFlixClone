@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:netflixproject/domain/core/api_end_points.dart';
-import 'package:netflixproject/domain/downloads/models/downloads.dart';
 import 'package:netflixproject/domain/search/model/search_resp/search_resp.dart';
 import 'package:netflixproject/domain/core/failures/main_failure.dart';
 import 'package:dartz/dartz.dart';

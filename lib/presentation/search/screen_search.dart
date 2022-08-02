@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netflixproject/application/search/search_bloc.dart';
 import 'package:netflixproject/core/constants.dart';
+import 'package:netflixproject/domain/core/debounce/debounce.dart';
 import 'package:netflixproject/presentation/search/search_idle.dart';
 import 'package:netflixproject/presentation/search/search_result.dart';
 
 class ScreenSearch extends StatelessWidget {
-  const ScreenSearch({Key? key}) : super(key: key);
-
+  ScreenSearch({Key? key}) : super(key: key);
+  final _debouncer = Debouncer(milliseconds: 1000);
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -30,10 +31,27 @@ class ScreenSearch extends StatelessWidget {
                 CupertinoIcons.xmark_circle_fill,
                 color: Colors.white,
               ),
+              onChanged: (value) {
+                if (value.isEmpty) {
+                  return;
+                }
+                _debouncer.run(() {
+                  BlocProvider.of<SearchBloc>(context)
+                      .add(SearchMovie(movieQuery: value));
+                });
+              },
               style: const TextStyle(color: Colors.white),
             ),
             kheight,
-            const Expanded(child: SearchIdleWidget()),
+            Expanded(child: BlocBuilder<SearchBloc, SearchState>(
+              builder: (context, state) {
+                if (state.searchResultList.isEmpty) {
+                  return const SearchIdleWidget();
+                } else {
+                  return const SearchResultWidget();
+                }
+              },
+            )),
           ],
         ),
       ),
