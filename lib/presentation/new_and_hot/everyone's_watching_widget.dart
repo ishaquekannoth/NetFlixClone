@@ -4,8 +4,11 @@ import 'package:netflixproject/presentation/home/custom_button_widget.dart';
 import 'package:netflixproject/presentation/widgets/video_widget.dart';
 
 class EveryonesWatchingWidget extends StatelessWidget {
+  final String posterPath;
+  final String movieName;
+  final String description;
   const EveryonesWatchingWidget({
-    Key? key,
+    Key? key, required this.posterPath, required this.movieName, required this.description,
   }) : super(key: key);
 
   @override

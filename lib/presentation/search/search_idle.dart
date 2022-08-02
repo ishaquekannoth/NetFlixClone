@@ -63,7 +63,9 @@ class TopItemSearchTile extends StatelessWidget {
               image: DecorationImage(
                   image: NetworkImage(imageUrl), fit: BoxFit.cover)),
         ),
-        const SizedBox(width: 5,),
+        const SizedBox(
+          width: 5,
+        ),
         Expanded(
             child: Text(
           title,

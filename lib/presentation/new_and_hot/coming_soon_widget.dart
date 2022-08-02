@@ -4,8 +4,14 @@ import 'package:netflixproject/presentation/home/custom_button_widget.dart';
 import 'package:netflixproject/presentation/widgets/video_widget.dart';
 
 class ComingSoonWidget extends StatelessWidget {
+  final String id;
+  final String month;
+  final String day;
+  final String posterPath;
+  final String movieName;
+  final String description;
   const ComingSoonWidget({
-    Key? key,
+    Key? key, required this.id, required this.month, required this.day, required this.posterPath, required this.movieName, required this.description,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

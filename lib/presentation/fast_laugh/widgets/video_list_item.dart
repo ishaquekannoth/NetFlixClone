@@ -91,7 +91,7 @@ class VideoListItem extends StatelessWidget {
                             // BlocProvider.of<FastLaughBloc>(context)
                             //       .add(LikeVideo(id: _index));
                             likedVideosByIdNotifier.value.add(index);
-                             likedVideosByIdNotifier.notifyListeners();
+                            likedVideosByIdNotifier.notifyListeners();
                           },
                           child: const VideoActionWidget(
                               icon: Icons.emoji_emotions, titile: 'Lol'),

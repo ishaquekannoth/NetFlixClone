@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:netflixproject/domain/core/api_end_points.dart';
