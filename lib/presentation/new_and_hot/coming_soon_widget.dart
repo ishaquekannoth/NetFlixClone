@@ -23,15 +23,15 @@ class ComingSoonWidget extends StatelessWidget {
           height: 500,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: const [
-              Text('FEB',
-                  style: TextStyle(
+            children:  [
+              Text(month,
+                  style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey)),
               Text(
-                '11',
-                style: TextStyle(
+                day,
+                style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 4),
@@ -45,53 +45,57 @@ class ComingSoonWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const VideoWidget(),
+              VideoWidget(url: posterPath),
                 Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      "Tall Girl",
-                      style: TextStyle(
-                          letterSpacing: -3,
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold),
+                     Expanded(
+                       child: Text(
+                        movieName,
+                        style: const TextStyle(
+                          overflow: TextOverflow.clip,
+                            letterSpacing: -3,
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold),
+                            maxLines: 1,
+                                         ),
+                     ),
+                  
+                    const CustomButtonWidget(
+                      icon: Icons.all_out_sharp,
+                      title: 'Remind Me',
+                      iconSize: 20,
+                      textSize: 16,
                     ),
-                    const Spacer(),
-                    Row(
-                      children: const [
-                        CustomButtonWidget(
-                          icon: Icons.all_out_sharp,
-                          title: 'Remind Me',
-                          iconSize: 20,
-                          textSize: 16,
-                        ),
-                        kwidth,
-                        CustomButtonWidget(
-                          icon: Icons.info,
-                          title: 'Info',
-                          iconSize: 20,
-                          textSize: 16,
-                        ),
-                        kwidth,
-                      ],
-                    )
+                    kwidth,
+                    const CustomButtonWidget(
+                      icon: Icons.info,
+                      title: 'Info',
+                      iconSize: 20,
+                      textSize: 16,
+                    ),
+                    kwidth
                   ],
                 ),
                 kheight,
-                const Text('Coming on friday'),
+                 Text('Coming on $day $month'),
                 kheight,
-                const Text(
-                  "Tall Girl",
-                  style: TextStyle(
+                 Text(
+                  movieName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 kheight,
-                const Text(
-                  'Landing the lead in the school in the musical is a dream come true for jodi,until the pressure sends her confidence-and her relationship-into a tailspain',
-                  style: TextStyle(color: Colors.grey),
+                 Text(
+                  description,
+                  maxLines: 4,
+
+                  style: const TextStyle(color: Colors.grey),
                 )
               ],
             )),

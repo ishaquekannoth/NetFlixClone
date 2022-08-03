@@ -30,7 +30,7 @@ class EveryonesWatchingWidget extends StatelessWidget {
           style: TextStyle(color: Colors.grey),
         ),
         kheight50,
-        const VideoWidget(),
+        const VideoWidget(url:newAndHotTempImage,),
         kheight,
         Row(
           mainAxisAlignment: MainAxisAlignment.end,

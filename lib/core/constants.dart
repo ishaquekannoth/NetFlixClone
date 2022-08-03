@@ -21,7 +21,8 @@ const kMainImage =
 TextStyle kHomeTileText =
     const TextStyle(fontSize: 14, fontWeight: FontWeight.bold);
 const newAndHotTempImage =
-    "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/mKFT6Q7PjrRLYuPLfmH4WLCXOiD.jpg";
+    "https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg";
+//"https://www.themoviedb.org/t/p/w300_and_h450_bestv2/mKFT6Q7PjrRLYuPLfmH4WLCXOiD.jpg";
 
 const newAndHotTempImage2 =
     "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/7InGE2Sux0o9WGbbn0bl7nZzqEc.jpg";

@@ -16,15 +16,17 @@ part 'hot_and_new_bloc.freezed.dart';
 class HotAndNewBloc extends Bloc<HotAndNewEvent, HotAndNewState> {
   final HotAndNewService _hotAndNewService;
   HotAndNewBloc(this._hotAndNewService) : super(HotAndNewState.initial()) {
-    emit(HotAndNewState(
+    
+    on<LoadDataInComingSoon>((event, emit) async {
+      
+      emit(const HotAndNewState(
         comingSoonList: [],
         everyOneIsWatchingList: [],
         isLoading: true,
         hasError: false));
 
-    on<LoadDataInComingSoon>((event, emit) async {
       final result = await _hotAndNewService.getHotAndNewMovieData();
-      final _state = result.fold((MainFailure failure) {
+      final newState = result.fold((MainFailure failure) {
         return (const HotAndNewState(
             comingSoonList: [],
             everyOneIsWatchingList: [],
@@ -33,12 +35,14 @@ class HotAndNewBloc extends Bloc<HotAndNewEvent, HotAndNewState> {
       }, (HotAndNewResp resp) {
         return (HotAndNewState(
             comingSoonList: resp.results,
-            everyOneIsWatchingList: [],
+            everyOneIsWatchingList: state.everyOneIsWatchingList,
             isLoading: false,
             hasError: false));
       });
-      emit(_state);
+      emit(newState);
     });
+
+
     on<LoadDataInEveryoneWatching>((event, emit) async {
 
       
