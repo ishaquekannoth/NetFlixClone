@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netflixproject/application/fast_laugh/fast_laugh_bloc.dart';
 import 'package:netflixproject/core/colors/colors.dart';
 import 'package:netflixproject/core/constants.dart';
@@ -11,7 +10,7 @@ class VideoListItemInheritedWidget extends InheritedWidget {
   final Widget widget;
   final Downloads movieData;
 
-  VideoListItemInheritedWidget(
+  const VideoListItemInheritedWidget(
       {Key? key, required this.widget, required this.movieData})
       : super(child: widget);
   @override
@@ -36,9 +35,9 @@ class VideoListItem extends StatelessWidget {
     return Stack(
       children: [
         (Container(
-          child: FastLaughVideoPlayer(
-              videoUrl: videoUrl, onStateChanged: (bool) {}),
           color: Colors.accents[index % Colors.accents.length],
+          child: FastLaughVideoPlayer(
+              videoUrl: videoUrl, onStateChanged: (bool change) {}),
         )),
         Align(
           alignment: Alignment.bottomCenter,

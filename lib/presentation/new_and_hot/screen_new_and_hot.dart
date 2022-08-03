@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:netflixproject/application/hot_and_new/hot_and_new_bloc.dart';
 import 'package:netflixproject/core/colors/colors.dart';
 import 'package:netflixproject/core/constants.dart';
 import 'package:netflixproject/presentation/new_and_hot/coming_soon_widget.dart';
-import "package:netflixproject/presentation/new_and_hot/everyone's_watching_widget.dart";
 
 class ScreenNewAndHot extends StatelessWidget {
   const ScreenNewAndHot({Key? key}) : super(key: key);
@@ -73,7 +73,7 @@ class ScreenNewAndHot extends StatelessWidget {
 _buildEveryonsWatching() {
   return ListView.builder(
     itemCount: 10,
-    itemBuilder: ((context, index) => SizedBox()),
+    itemBuilder: ((context, index) => const SizedBox()),
   );
 }
 
@@ -94,18 +94,15 @@ class ComingSoonList extends StatelessWidget {
           return (const Center(
             child: CircularProgressIndicator(strokeWidth: 2),
           ));
-        }  
-         else if (state.hasError) {
+        } else if (state.hasError) {
           return (const Center(
             child: Text("Err loading coming soon List"),
           ));
-        }
-        else if (state.comingSoonList.isEmpty) {
+        } else if (state.comingSoonList.isEmpty) {
           return (const Center(
             child: Text("Coming soon List is empty"),
           ));
-        }      
-        else {
+        } else {
           return ListView.builder(
               itemCount: state.comingSoonList.length,
               itemBuilder: (BuildContext context, index) {
@@ -113,10 +110,13 @@ class ComingSoonList extends StatelessWidget {
                 if (movie.id == null) {
                   return (const SizedBox());
                 }
+                final _date = DateTime.parse(movie.releaseDate!);
+                final formattedDate = DateFormat.yMMMMd('en_US').format(_date);
+                
                 return ComingSoonWidget(
                     id: movie.id.toString(),
-                    month: 'Mar',
-                    day: '11',
+                    month: formattedDate.split(' ').first.substring(0,3).toUpperCase(),
+                    day: movie.releaseDate!.split('-')[1],
                     posterPath: '$imageAppendUrl${movie.posterPath}',
                     movieName: movie.originalTitle ?? 'No title',
                     description: movie.overview ?? 'No description');

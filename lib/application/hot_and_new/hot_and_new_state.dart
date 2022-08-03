@@ -10,6 +10,6 @@ class HotAndNewState with _$HotAndNewState {
   }) = _Initial;
 
   factory HotAndNewState.initial() =>
-      HotAndNewState(comingSoonList: [], everyOneIsWatchingList: [],isLoading: false,hasError: false);
+      const HotAndNewState(comingSoonList: [], everyOneIsWatchingList: [],isLoading: false,hasError: false);
 
 }

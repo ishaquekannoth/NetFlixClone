@@ -9,7 +9,7 @@ import 'package:netflixproject/presentation/widgets/app_bar_widget.dart';
 
 class ScreenDownloads extends StatelessWidget {
   ScreenDownloads({Key? key}) : super(key: key);
-  final _widgetList = [const _SmartDownloads(), Section2(), const Section3()];
+  final _widgetList = [const _SmartDownloads(), const Section2(), const Section3()];
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class ScreenDownloads extends StatelessWidget {
 }
 
 class Section2 extends StatelessWidget {
-  Section2({Key? key}) : super(key: key);
+  const Section2({Key? key}) : super(key: key);
   // final List imageList = [
   //   "https://www.themoviedb.org/t/p/w220_and_h330_face/8cXbitsS6dWQ5gfMTZdorpAAzEH.jpg",
   //   "https://www.themoviedb.org/t/p/w220_and_h330_face/x1q3FkqFHBkMeKnHiS6GYgdLvUs.jpg",
